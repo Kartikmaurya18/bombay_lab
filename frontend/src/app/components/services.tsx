@@ -1,13 +1,21 @@
 import {
   Atom,
-  Building2,
-  Beaker,
-  TreePine,
-  Pill,
-  Microscope,
-  Zap,
-  Gauge,
+  Package,
+  Archive,
+  Disc,
+  Droplet,
   Shirt,
+  Fuel,
+  Flame,
+  Wheat,
+  PawPrint,
+  Droplets,
+  Sprout,
+  Layers,
+  Mountain,
+  SprayCan,
+  Palette,
+  FlaskConical,
   ChevronRight,
 } from "lucide-react";
 import {
@@ -20,7 +28,7 @@ import {
 import { Button } from "@/app/components/ui/button";
 import { motion } from "motion/react";
 
-/* ---------------- ICON WRAPPER (NEW) ---------------- */
+/* ---------------- ICON WRAPPER ---------------- */
 
 function GradientIcon({
   icon: Icon,
@@ -49,124 +57,242 @@ function GradientIcon({
 export function Services() {
   const services = [
     {
+      icon: Layers,
+      title: "Metals & Alloys",
+      description:
+        "Non-destructive XRF elemental analysis and grade identification for metals and alloys.",
+      tests: [
+        "XRF Elemental Analysis",
+        "Alloy Grade Identification",
+        "PMI (Positive Material ID)",
+        "Trace Element Analysis",
+        "Spectrochemical Analysis",
+      ],
+      gradient: "from-zinc-500 to-slate-400",
+    },
+    {
       icon: Atom,
       title: "Materials & Metallurgy",
       description:
-        "Comprehensive testing for metals, alloys, welds, and material characterization.",
+        "Comprehensive mechanical and microstructural testing for metals, alloys, and welds.",
       tests: [
         "Tensile Testing",
         "Hardness Testing",
         "Metallography",
-        "Chemical Analysis",
+        "Weld Testing",
         "Corrosion Testing",
       ],
       gradient: "from-blue-500 to-cyan-400",
     },
     {
-      icon: Building2,
-      title: "Construction & Civil",
+      icon: Mountain,
+      title: "Minerals & Ores",
       description:
-        "Concrete, soil, aggregate, and construction materials testing.",
+        "Compositional and physical analysis of minerals, ores, and geological samples.",
       tests: [
-        "Concrete Testing",
-        "Soil Analysis",
-        "Aggregate Testing",
-        "Cement Testing",
-        "Structural Analysis",
+        "Chemical Assay",
+        "Moisture Content",
+        "Particle Size Analysis",
+        "Trace Element Analysis",
+        "Mineralogical Study",
       ],
-      gradient: "from-teal-500 to-emerald-400",
+      gradient: "from-orange-600 to-amber-500",
     },
     {
-      icon: Beaker,
-      title: "Chemical Analysis",
+      icon: Package,
+      title: "Plastics & Polymers",
       description:
-        "Advanced analytical chemistry services using modern instrumentation.",
-      tests: ["GC-MS", "HPLC", "ICP-OES", "FTIR", "Wet Chemistry"],
-      gradient: "from-orange-500 to-amber-400",
-    },
-    {
-      icon: TreePine,
-      title: "Environmental Testing",
-      description:
-        "Water, air, soil, and noise pollution analysis for compliance.",
+        "Physical, mechanical, and chemical testing of plastic and polymer materials.",
       tests: [
-        "Water Quality",
-        "Air Quality",
-        "Soil Testing",
-        "Noise Monitoring",
-        "Effluent Analysis",
+        "Melt Flow Index",
+        "Tensile Strength",
+        "Thermal Analysis",
+        "Density Testing",
+        "Polymer Identification",
       ],
-      gradient: "from-green-500 to-lime-400",
+      gradient: "from-sky-500 to-blue-400",
     },
     {
-      icon: Pill,
-      title: "Pharmaceutical & Cosmetic",
+      icon: Disc,
+      title: "Rubber and Rubber Products",
       description:
-        "Quality control and regulatory testing for pharma products.",
+        "Physical and chemical evaluation of rubber compounds and finished products.",
       tests: [
-        "Stability Testing",
-        "Dissolution",
-        "Assay Testing",
+        "Tensile & Elongation",
+        "Hardness (Shore)",
+        "Abrasion Resistance",
+        "Ageing Testing",
+        "Compression Set",
+      ],
+      gradient: "from-slate-600 to-slate-400",
+    },
+    {
+      icon: Shirt,
+      title: "Textile Products",
+      description:
+        "Physical and chemical testing of fabrics, yarns, and finished textiles.",
+      tests: [
+        "Tensile Strength",
+        "Color Fastness",
+        "GSM Testing",
+        "Shrinkage Testing",
+        "Fibre Composition",
+      ],
+      gradient: "from-indigo-500 to-violet-400",
+    },
+    {
+      icon: Archive,
+      title: "Paper & Packaging Products",
+      description:
+        "Quality and performance testing for paper, board, and packaging materials.",
+      tests: [
+        "GSM Testing",
+        "Bursting Strength",
+        "Moisture Content",
+        "Compression Testing",
+        "Sealing Strength",
+      ],
+      gradient: "from-amber-500 to-yellow-400",
+    },
+    {
+      icon: Droplet,
+      title: "Adhesives & Resins",
+      description:
+        "Performance and compositional testing of adhesives, sealants, and resins.",
+      tests: [
+        "Bond Strength",
+        "Viscosity Testing",
+        "Curing Time",
+        "Solid Content",
+        "Chemical Resistance",
+      ],
+      gradient: "from-orange-500 to-red-400",
+    },
+    {
+      icon: Fuel,
+      title: "Lubricants & Petroleum Products",
+      description:
+        "Physicochemical testing of oils, lubricants, and petroleum-based products.",
+      tests: [
+        "Viscosity Testing",
+        "Flash Point",
+        "Pour Point",
+        "Calorific Value",
+        "Water Content",
+      ],
+      gradient: "from-yellow-600 to-amber-500",
+    },
+    {
+      icon: Flame,
+      title: "Coal, Coke & Solid Fuels",
+      description:
+        "Proximate and ultimate analysis of coal, coke, and other solid fuels.",
+      tests: [
+        "Calorific Value",
+        "Ash Content",
+        "Moisture Content",
+        "Volatile Matter",
+        "Sulphur Content",
+      ],
+      gradient: "from-stone-600 to-neutral-500",
+    },
+    {
+      icon: FlaskConical,
+      title: "Acids, Solvents & Chemicals",
+      description:
+        "Purity and compositional analysis of industrial acids, solvents, and chemicals.",
+      tests: [
+        "Purity Analysis",
+        "GC-MS",
+        "HPLC",
+        "Titrimetric Analysis",
         "Heavy Metals",
-        "Microbial Limits",
       ],
       gradient: "from-purple-500 to-fuchsia-400",
     },
     {
-      icon: Microscope,
-      title: "Microbiology",
+      icon: Droplets,
+      title: "Water & Effluents",
       description:
-        "Comprehensive microbiological analysis of samples.",
+        "Physicochemical and microbiological testing of water and effluent samples.",
       tests: [
-        "Total Plate Count",
-        "Pathogen Detection",
-        "Sterility Testing",
-        "Antimicrobial Testing",
-        "Culture Studies",
+        "Water Quality",
+        "Effluent Analysis",
+        "BOD & COD",
+        "Heavy Metals",
+        "Microbial Testing",
       ],
-      gradient: "from-pink-500 to-rose-400",
+      gradient: "from-cyan-500 to-blue-400",
     },
     {
-      icon: Zap,
-      title: "Electrical & Electronics",
+      icon: Sprout,
+      title: "Soil & Fertilizer",
       description:
-        "Safety and performance testing for electrical equipment.",
+        "Nutrient and quality analysis of soil, fertilizers, and soil amendments.",
       tests: [
-        "Safety Testing",
-        "EMC Testing",
-        "Performance Testing",
-        "Component Analysis",
-        "Reliability Testing",
+        "NPK Analysis",
+        "Soil pH & EC",
+        "Micronutrient Testing",
+        "Organic Matter",
+        "Heavy Metals",
       ],
-      gradient: "from-yellow-500 to-amber-400",
+      gradient: "from-green-600 to-lime-500",
     },
     {
-      icon: Gauge,
-      title: "Calibration Services",
+      icon: Wheat,
+      title: "Food & Agriculture Products",
       description:
-        "NABL accredited calibration for measuring instruments.",
+        "Compositional, quality, and safety testing of food and agricultural products.",
       tests: [
-        "Dimensional Cal.",
-        "Electrical Cal.",
-        "Thermal Cal.",
-        "Pressure Cal.",
-        "Mass Cal.",
+        "Proximate Analysis",
+        "Pesticide Residue",
+        "Heavy Metals",
+        "Microbial Testing",
+        "Nutritional Labeling",
       ],
-      gradient: "from-cyan-500 to-sky-400",
+      gradient: "from-lime-500 to-green-400",
     },
     {
-      icon: Shirt,
-      title: "Textiles & Polymers",
+      icon: PawPrint,
+      title: "Animal Food & Feed Products",
       description:
-        "Physical and chemical testing of textiles and polymers.",
+        "Nutritional and contaminant testing for animal feed and feed ingredients.",
       tests: [
-        "Tensile Strength",
-        "Color Fastness",
-        "Polymer Analysis",
-        "Petroleum Testing",
-        "Lubricant Analysis",
+        "Proximate Analysis",
+        "Mycotoxin Testing",
+        "Amino Acid Profile",
+        "Heavy Metals",
+        "Microbial Contamination",
       ],
-      gradient: "from-indigo-500 to-violet-400",
+      gradient: "from-emerald-500 to-teal-400",
+    },
+    {
+      icon: SprayCan,
+      title: "Soaps, Detergents & Toiletries",
+      description:
+        "Quality and performance testing of soaps, detergents, and personal care products.",
+      tests: [
+        "pH Testing",
+        "Active Matter Content",
+        "Foam Stability",
+        "Heavy Metals",
+        "Microbial Limits",
+      ],
+      gradient: "from-fuchsia-500 to-pink-400",
+    },
+    {
+      icon: Palette,
+      title: "Paint, Pigments & Surface Coatings",
+      description:
+        "Physical and chemical testing of paints, pigments, and protective coatings.",
+      tests: [
+        "Viscosity Testing",
+        "Adhesion Testing",
+        "Drying Time",
+        "Opacity & Gloss",
+        "Weathering Resistance",
+      ],
+      gradient: "from-rose-500 to-red-400",
     },
   ];
 
