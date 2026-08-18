@@ -21,7 +21,7 @@ export function Footer() {
   ];
 
   const compliance = [
-    "ISO/IEC 17025:2017",
+    "ISO 9001:2015",
     "NABL Accredited",
     "UKAS Certified",
     "FSSAI Approved",
@@ -63,7 +63,7 @@ export function Footer() {
                 </div>
               </div>
               <p className="text-sm text-gray-400 mb-6">
-                ISO 17025 accredited laboratory providing world-class testing services across multiple domains since 2005.
+                ISO 9001:2015 accredited laboratory providing world-class testing services across multiple domains since 2005.
               </p>
               <div className="space-y-3">
                 <a href="tel:+9869534396" className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
@@ -162,7 +162,7 @@ Masrani Lane, Halav Pool,<br />Kurla (W), Mumbai – 400 070</span>
         {/* Disclaimer */}
         <div className="border-t border-gray-800 py-4">
           <p className="text-xs text-gray-500 text-center leading-relaxed">
-            All testing is performed in accordance with ISO/IEC 17025:2017 standards. Test reports are issued under our scope of accreditation. 
+            All testing is performed in accordance with ISO 9001:2015 standards. Test reports are issued under our scope of accreditation. 
             For specific test methods and accreditation details, please contact our laboratory.
           </p>
         </div>

@@ -12,7 +12,7 @@ export function AboutAccreditations() {
 
   const accreditations = [
     {
-      name: "ISO/IEC 17025:2017",
+      name: "ISO 9001:2015",
       description: "Testing & Calibration Laboratories",
       logo: "/assets/hero/acc1.jpg"},
     {
@@ -242,7 +242,7 @@ export function AboutAccreditations() {
               <div>
                 <h4 className="font-semibold text-lg text-[var(--lab-blue-dark)] mb-2">Quality Management System</h4>
                 <p className="text-sm text-[var(--lab-gray-600)] leading-relaxed">
-                  Our laboratory operates under a robust quality management system compliant with ISO/IEC 17025:2017 standards. We maintain strict quality control protocols, participate in regular proficiency testing programs, and undergo periodic external audits to ensure the highest level of service quality and data integrity.
+                  Our laboratory operates under a robust quality management system compliant with ISO 9001:2015 standards. We maintain strict quality control protocols, participate in regular proficiency testing programs, and undergo periodic external audits to ensure the highest level of service quality and data integrity.
                 </p>
               </div>
             </div>

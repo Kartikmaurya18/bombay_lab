@@ -11,7 +11,7 @@ export function Hero() {
   };
 
   const features = [
-    { icon: Award, text: "ISO 17025 Accredited" },
+    { icon: Award, text: "ISO 9001:2015 Accredited" },
     { icon: Shield, text: "NABL & UKAS Certified" },
     { icon: Clock, text: "24-48 Hour TAT" },
     { icon: CheckCircle2, text: "99.8% Accuracy Rate" },
@@ -42,7 +42,7 @@ export function Hero() {
             </h1>
             
             <p className="text-lg sm:text-xl text-[var(--lab-gray-600)] mb-8 max-w-2xl mx-auto lg:mx-0">
-              ISO 17025 accredited testing laboratory providing comprehensive analytical services across 10+ domains. Delivering accurate, certified results with industry-leading turnaround times.
+              ISO 9001:2015 accredited testing laboratory providing comprehensive analytical services across 10+ domains. Delivering accurate, certified results with industry-leading turnaround times.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">

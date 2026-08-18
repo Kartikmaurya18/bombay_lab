@@ -39,7 +39,7 @@ export function Navbar() {
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "About", path: "/about" },
-    { name: "Accreditations", path: "/process" },
+    { name: "Process", path: "/process" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -135,11 +135,11 @@ export function Navbar() {
                     </a>
 
                     <a
-                      href="mailto:info@bombaylab.com"
+                      href="mailto:bombaylab.vishwakarma@gmail.com"
                       className="flex items-center gap-3 text-sm text-[var(--lab-gray-600)]"
                     >
                       <Mail className="h-5 w-5" />
-                      info@bombaylab.com
+                      bombaylab.vishwakarma@gmail.com
                     </a>
 
                     <Button

@@ -75,8 +75,7 @@ const slides = [
 /* ---------------- TRUST BADGES ---------------- */
 
 const trustBadges = [
-  { icon: Award, text: "ISO 17025" },
-  { icon: Shield, text: "NABL Certified" },
+  { icon: Award, text: "ISO 9001:2015" },
   { icon: Clock, text: "24–48h TAT" },
   { icon: CheckCircle2, text: "99.8% Accuracy" }
 ];
@@ -180,17 +179,23 @@ export function HeroSlider() {
                             <Button variant="outline">View Services</Button>
                           </div>
 
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
                             {trustBadges.map((b, i) => {
                               const BIcon = b.icon;
                               return (
-                                <div
+                                <motion.div
                                   key={i}
-                                  className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-2 rounded-lg"
+                                  initial={{ opacity: 0, y: 15 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
+                                  whileHover={{ y: -4, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+                                  className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10 shadow-lg cursor-default transition-all duration-300"
                                 >
-                                  <BIcon className="text-orange-400" size={18} />
-                                  <span className="text-sm">{b.text}</span>
-                                </div>
+                                  <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-orange-500/20 text-orange-400 shrink-0">
+                                    <BIcon size={18} />
+                                  </div>
+                                  <span className="text-sm font-semibold tracking-wide text-white">{b.text}</span>
+                                </motion.div>
                               );
                             })}
                           </div>
