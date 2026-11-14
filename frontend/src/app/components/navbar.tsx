@@ -3,6 +3,7 @@ import { Menu, Phone, Mail } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet";
 import { useNavigate } from "react-router-dom";
+import { SITE, PRIMARY_PHONE } from "@/app/data/site";
 
 
 /* ---------------- LOGO COMPONENT ---------------- */
@@ -18,10 +19,10 @@ function Logo({ onClick }: { onClick: () => void }) {
         src="/assets/hero/logo-bombay-lab.png"
         alt="Bombay Lab logo"
         className="h-8 sm:h-9 w-auto select-none"
-        width={160}
-        height={40}
+        width={36}
+        height={36}
         loading="eager"
-        decoding="sync"
+        decoding="async"
       />
       <span className="italic text-lg sm:text-xl font-semibold tracking-tight text-[var(--lab-blue-dark)]">
         Bombay<span className="text-[var(--lab-blue-primary)]">Lab</span>
@@ -75,11 +76,11 @@ export function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="tel:9869534396"
+              href={`tel:${PRIMARY_PHONE.tel}`}
               className="flex items-center gap-2 text-sm text-[var(--lab-gray-600)] hover:text-[var(--lab-blue-primary)]"
             >
               <Phone className="h-4 w-4" />
-              9869534396
+              {PRIMARY_PHONE.display}
             </a>
 
             <Button
@@ -127,19 +128,19 @@ export function Navbar() {
                   {/* Mobile CTA */}
                   <div className="flex flex-col gap-4 pt-6 border-t">
                     <a
-                      href="tel:+919869534396"
+                      href={`tel:${PRIMARY_PHONE.tel}`}
                       className="flex items-center gap-3 text-sm text-[var(--lab-gray-600)]"
                     >
                       <Phone className="h-5 w-5" />
-                      9869534396
+                      {PRIMARY_PHONE.display}
                     </a>
 
                     <a
-                      href="mailto:bombaylab.vishwakarma@gmail.com"
+                      href={`mailto:${SITE.email}`}
                       className="flex items-center gap-3 text-sm text-[var(--lab-gray-600)]"
                     >
                       <Mail className="h-5 w-5" />
-                      bombaylab.vishwakarma@gmail.com
+                      {SITE.email}
                     </a>
 
                     <Button

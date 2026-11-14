@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <g stroke="#3a3a3a" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Steel I-beam (back left) -->
+    <g transform="rotate(-18 120 150)">
+      <path d="M46 92 h150 l14 -14 h-150 z" fill="#d5dbe2"/>
+      <path d="M196 92 l14 -14 v26 l-14 14 z" fill="#8e98a3"/>
+      <rect x="46" y="92" width="150" height="26" fill="#aeb7c1"/>
+      <path d="M104 118 h34 l14 -14 v96 l-14 14 h-34 z" fill="#8e98a3"/>
+      <rect x="104" y="118" width="34" height="96" fill="#aeb7c1"/>
+      <path d="M46 214 h150 l14 -14 v26 l-14 14 h-150 z" fill="#8e98a3"/>
+      <path d="M46 214 h150 l14 -14 h-150 z" fill="#d5dbe2"/>
+      <rect x="46" y="214" width="150" height="26" fill="#aeb7c1"/>
+    </g>
+
+    <!-- Gear (right) -->
+    <g transform="translate(232 112)">
+      <path fill="#e9a23b" d="M-9 -58 h18 l3 14 a46 46 0 0 1 12 5 l12 -8 l13 13 l-8 12 a46 46 0 0 1 5 12 l14 3 v18 l-14 3 a46 46 0 0 1 -5 12 l8 12 l-13 13 l-12 -8 a46 46 0 0 1 -12 5 l-3 14 h-18 l-3 -14 a46 46 0 0 1 -12 -5 l-12 8 l-13 -13 l8 -12 a46 46 0 0 1 -5 -12 l-14 -3 v-18 l14 -3 a46 46 0 0 1 5 -12 l-8 -12 l13 -13 l12 8 a46 46 0 0 1 12 -5 z"/>
+      <circle r="16" fill="#fff6e3"/>
+    </g>
+
+    <!-- Magnifier showing metal grain structure (front) -->
+    <line x1="232" y1="268" x2="282" y2="300" stroke-width="22" stroke="#3a3a3a"/>
+    <line x1="232" y1="268" x2="278" y2="297" stroke-width="10" stroke="#5b6670"/>
+    <circle cx="186" cy="226" r="62" fill="#5b6670"/>
+    <circle cx="186" cy="226" r="48" fill="#cfe9f7"/>
+  </g>
+
+  <!-- grains inside the lens -->
+  <clipPath id="lens"><circle cx="186" cy="226" r="45"/></clipPath>
+  <g clip-path="url(#lens)" fill="none" stroke="#5a8fb0" stroke-width="3.5" stroke-linejoin="round">
+    <path d="M140 205 L165 196 L178 214 L160 232 L138 228"/>
+    <path d="M165 196 L182 180 L205 188 L200 210 L178 214"/>
+    <path d="M200 210 L224 206 L236 228"/>
+    <path d="M160 232 L172 254 L196 250 L200 210"/>
+    <path d="M196 250 L220 252 L230 232 L224 206"/>
+    <path d="M172 254 L166 276"/>
+    <path d="M205 188 L222 176"/>
+    <path d="M138 228 L134 256 L172 254"/>
+  </g>
+  <path d="M158 196 a40 40 0 0 1 22 -14" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.9"/>
+</svg>

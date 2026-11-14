@@ -1,4 +1,5 @@
 import { FaWhatsapp } from "react-icons/fa";
+import { SITE } from "@/app/data/site";
 
 type Props = {
   phone?: string;
@@ -6,8 +7,8 @@ type Props = {
 };
 
 export function FloatingWhatsApp({
-  phone = "912212345678",
-  message = "Hello! I would like to know more about your testing services.",
+  phone = SITE.whatsapp,
+  message = SITE.whatsappMessage,
 }: Props) {
   const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   return (

@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 import {
   Send,
-  FileText,
   CheckCircle2,
+  Phone,
+  Mail,
+  MessageCircle,
+  MapPin,
+  Clock,
+  type LucideIcon,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -13,12 +19,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { toast } from "sonner";
-import { motion } from "motion/react";
+import { m } from "motion/react";
+import { SITE, whatsappHref } from "@/app/data/site";
+import { ALL_SERVICES } from "@/app/data/services";
 
-import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import { SiGooglemaps } from "react-icons/si";
-import { LuClock } from "react-icons/lu";
+const SERVICE_TYPES = [...ALL_SERVICES.map((s) => s.title), "Other / Custom Testing"];
 
 /* ---------------- TYPES ---------------- */
 
@@ -43,24 +48,67 @@ interface SampleFormData {
   additionalRequirements: string;
 }
 
-/* ---------------- ICON BADGE ---------------- */
+/* ---------------- API ---------------- */
 
-function DynamicContactIcon({
-  icon: Icon,
-  gradient,
-}: {
-  icon: any;
-  gradient: string;
-}) {
+const API_BASE = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+const REQUEST_TIMEOUT_MS = 15000;
+
+// Aborts hung requests and sends an idempotency key so a server can de-dupe retries.
+async function postContact(payload: Record<string, unknown>) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    const res = await fetch(`${API_BASE}/api/contact`, {
+      method: "POST",
+      signal: ctrl.signal,
+      headers: {
+        "Content-Type": "application/json",
+        "Idempotency-Key": crypto.randomUUID(),
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      throw new Error(`Request failed with status ${res.status}`);
+    }
+    return res;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/* ---------------- CONTACT ITEM ---------------- */
+
+interface ContactItem {
+  icon: LucideIcon;
+  title: string;
+  lines: { text: string; href?: string; external?: boolean }[];
+}
+
+function ContactRow({ icon: Icon, title, lines }: ContactItem) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.15, rotate: 3, y: -4 }}
-      transition={{ duration: 0.2 }}
-      className={`relative h-10 w-10 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg`}
-    >
-      <div className={`absolute inset-0 blur-lg opacity-40 bg-gradient-to-br ${gradient}`} />
-      <Icon className="relative h-5 w-5 text-white" />
-    </motion.div>
+    <div className="flex gap-4">
+      <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--lab-blue-light)]">
+        <Icon className="h-5 w-5 text-[var(--lab-blue-primary)]" />
+      </span>
+      <div>
+        <div className="font-semibold text-[var(--lab-blue-dark)]">{title}</div>
+        {lines.map(({ text, href, external }) => (
+          <div key={text} className="text-sm text-[var(--lab-gray-600)]">
+            {href ? (
+              <a
+                href={href}
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="hover:text-[var(--lab-blue-primary)]"
+              >
+                {text}
+              </a>
+            ) : (
+              text
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -69,34 +117,18 @@ function DynamicContactIcon({
 export function ContactInquiry() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const inquiryForm = useForm<InquiryFormData>();
-  const sampleForm = useForm<SampleFormData>();
+  // Pre-select the service when arriving from a service card ("Get a quote").
+  const location = useLocation();
+  const preselected = (location.state as { service?: string } | null)?.service;
+  const defaultService = preselected && SERVICE_TYPES.includes(preselected) ? preselected : undefined;
 
-  const apiBase = import.meta.env.VITE_API_URL || "";
-
-  const buildApiUrl = (path: string) => {
-    const base = apiBase.replace(/\/$/, "");
-    const p = path.startsWith("/") ? path : `/${path}`;
-    return `${base}${p}`;
-  };
+  const inquiryForm = useForm<InquiryFormData>({ defaultValues: { serviceType: defaultService } });
+  const sampleForm = useForm<SampleFormData>({ defaultValues: { serviceType: defaultService } });
 
   const handleInquirySubmit = async (data: InquiryFormData) => {
     setIsSubmitting(true);
     try {
-      const res = await fetch(buildApiUrl("/api/contact"), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "inquiry",
-          ...data,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error(`Request failed with status ${res.status}`);
-      }
+      await postContact({ type: "inquiry", ...data });
 
       toast.success("Inquiry submitted successfully!", {
         icon: <CheckCircle2 className="h-5 w-5" />,
@@ -112,20 +144,7 @@ export function ContactInquiry() {
   const handleSampleSubmit = async (data: SampleFormData) => {
     setIsSubmitting(true);
     try {
-      const res = await fetch(buildApiUrl("/api/contact"), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "sample",
-          ...data,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error(`Request failed with status ${res.status}`);
-      }
+      await postContact({ type: "sample", ...data });
 
       toast.success("Sample booking request received!", {
         icon: <CheckCircle2 className="h-5 w-5" />,
@@ -140,63 +159,41 @@ export function ContactInquiry() {
 
   /* ---------------- CONTACT INFO ---------------- */
 
-  const contactInfo = [
+  const contactInfo: ContactItem[] = [
     {
-      icon: FaPhoneAlt,
+      icon: Phone,
       title: "Phone",
-      details: ["9869534396", "9004370942"],
-      action: ["tel:9869534396","tel:9004370942"],
-      gradient: "from-sky-500 to-blue-500",
+      lines: SITE.phones.map((p) => ({ text: p.display, href: `tel:${p.tel}` })),
     },
     {
-      icon: MdEmail,
-      title: "Email",
-      details: ["bombaylab.vishwakarma@gmail.com", "support@precisionlabs.com"],
-      action: "bombaylab.vishwakarma@gmail.com",
-      gradient: "from-red-500 to-rose-500",
-    },
-    {
-      icon: FaWhatsapp,
+      icon: MessageCircle,
       title: "WhatsApp",
-      details: ["Chat with us instantly"],
-      action: "https://wa.me/9869534396",
-      gradient: "from-green-500 to-emerald-500",
+      lines: [{ text: "Chat with us instantly", href: whatsappHref(), external: true }],
     },
     {
-      icon: SiGooglemaps,
-      title: "Location",
-      details: ["123 Science Park Drive", "Innovation District, CA"],
-      action: "https://www.google.com/maps/place/Bombay+lab/data=!4m7!3m6!1s0x3be7c9006cc6558d:0xa5d9c8488a755ced!8m2!3d19.0746875!4d72.8832902!16s%2Fg%2F11w_njlq9j!19sChIJjVXGbADJ5zsR7Vx1ikjI2aU?authuser=0&hl=en&rclk=1",
-      gradient: "from-blue-600 to-cyan-500",
+      icon: Mail,
+      title: "Email",
+      lines: [{ text: SITE.email, href: `mailto:${SITE.email}` }],
     },
     {
-      icon: LuClock,
-      title: "Working Hours",
-      details: ["Mon – Fri: 8:00 AM – 6:00 PM", "Sat: 9:00 AM – 2:00 PM"],
-      action: null,
-      gradient: "from-gray-500 to-slate-500",
+      icon: MapPin,
+      title: "Lab address",
+      lines: SITE.address.map((line, i) =>
+        i === 0 ? { text: line, href: SITE.mapsUrl, external: true } : { text: line },
+      ),
     },
-  ];
-
-  const serviceTypes = [
-    "Materials & Metallurgy",
-    "Construction & Civil Testing",
-    "Chemical Analysis",
-    "Environmental Testing",
-    "Food & Beverage Testing",
-    "Pharmaceutical & Cosmetic",
-    "Microbiology",
-    "Electrical & Electronics",
-    "Calibration Services",
-    "Textiles & Polymers",
-    "Other / Custom Testing",
+    {
+      icon: Clock,
+      title: "Working hours",
+      lines: SITE.hours.map((text) => ({ text })),
+    },
   ];
 
   return (
     <section id="contact" className="py-16 sm:py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* HEADER */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -209,69 +206,34 @@ export function ContactInquiry() {
           <p className="text-lg text-[var(--lab-gray-600)] max-w-3xl mx-auto">
             Ready to start your testing project? Our expert team is here to assist you
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
           {/* CONTACT INFO */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            {contactInfo.map((info, index) => (
-              <Card key={index} className="hover:shadow-md transition">
-                <CardContent className="p-4 flex gap-4">
-                  <DynamicContactIcon
-                    icon={info.icon}
-                    gradient={info.gradient}
-                  />
-                  <div>
-                    <div className="font-semibold text-[var(--lab-blue-dark)]">
-                      {info.title}
-                    </div>
-                    {info.details.map((d, i) => {
-                      const href = Array.isArray(info.action)
-                        ? info.action[i]
-                        : info.action ?? undefined;
-                      return (
-                        <div key={i} className="text-sm text-[var(--lab-gray-600)]">
-                          {href ? (
-                            <a
-                              href={href}
-                              target="_blank"
-                              className="hover:text-[var(--lab-blue-primary)]"
-                            >
-                              {d}
-                            </a>
-                          ) : (
-                            d
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-
-            {/* Quick Info */}
-            <div className="bg-gradient-to-br from-[var(--lab-blue-primary)] to-[var(--lab-teal)] rounded-xl p-6 text-white">
-              <FileText className="h-8 w-8 mb-3" />
-              <h4 className="font-semibold text-lg mb-2">Need a Quick Quote?</h4>
-              <p className="text-sm text-white/90 mb-4">
-                Fill out the form and get a detailed quote within 2 business hours
-              </p>
-              <div className="flex items-center gap-2 text-sm">
-                <CheckCircle2 className="h-4 w-4" />
-                <span>Fast Response Guaranteed</span>
-              </div>
+            <div className="space-y-5 rounded-xl border border-[var(--lab-gray-200)] p-6">
+              {contactInfo.map((info) => (
+                <ContactRow key={info.title} {...info} />
+              ))}
             </div>
-          </motion.div>
+
+            <iframe
+              title="Bombay Lab location on Google Maps"
+              src={SITE.mapsEmbed}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-56 w-full rounded-xl border border-[var(--lab-gray-200)]"
+            />
+          </m.div>
 
           {/* Forms Section */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -300,7 +262,7 @@ export function ContactInquiry() {
                           <Label htmlFor="inquiry-name">Full Name *</Label>
                           <Input
                             id="inquiry-name"
-                            placeholder="John Doe"
+                            placeholder="Your name"
                             {...inquiryForm.register("name", { required: true })}
                           />
                         </div>
@@ -309,7 +271,7 @@ export function ContactInquiry() {
                           <Input
                             id="inquiry-email"
                             type="email"
-                            placeholder="john@company.com"
+                            placeholder="you@company.com"
                             {...inquiryForm.register("email", { required: true })}
                           />
                         </div>
@@ -321,7 +283,7 @@ export function ContactInquiry() {
                           <Input
                             id="inquiry-phone"
                             type="tel"
-                            placeholder="+1 (234) 567-890"
+                            placeholder="+91 98765 43210"
                             {...inquiryForm.register("phone", { required: true })}
                           />
                         </div>
@@ -337,12 +299,12 @@ export function ContactInquiry() {
 
                       <div className="space-y-2">
                         <Label htmlFor="inquiry-service">Service Type *</Label>
-                        <Select onValueChange={(value) => inquiryForm.setValue("serviceType", value)}>
+                        <Select value={inquiryForm.watch("serviceType") ?? ""} onValueChange={(value) => inquiryForm.setValue("serviceType", value)}>
                           <SelectTrigger id="inquiry-service">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
                           <SelectContent>
-                            {serviceTypes.map((service) => (
+                            {SERVICE_TYPES.map((service) => (
                               <SelectItem key={service} value={service}>
                                 {service}
                               </SelectItem>
@@ -386,7 +348,7 @@ export function ContactInquiry() {
                           <Label htmlFor="sample-name">Full Name *</Label>
                           <Input
                             id="sample-name"
-                            placeholder="John Doe"
+                            placeholder="Your name"
                             {...sampleForm.register("name", { required: true })}
                           />
                         </div>
@@ -395,7 +357,7 @@ export function ContactInquiry() {
                           <Input
                             id="sample-email"
                             type="email"
-                            placeholder="john@company.com"
+                            placeholder="you@company.com"
                             {...sampleForm.register("email", { required: true })}
                           />
                         </div>
@@ -407,7 +369,7 @@ export function ContactInquiry() {
                           <Input
                             id="sample-phone"
                             type="tel"
-                            placeholder="+1 (234) 567-890"
+                            placeholder="+91 98765 43210"
                             {...sampleForm.register("phone", { required: true })}
                           />
                         </div>
@@ -423,12 +385,12 @@ export function ContactInquiry() {
 
                       <div className="space-y-2">
                         <Label htmlFor="sample-service">Testing Service Required *</Label>
-                        <Select onValueChange={(value) => sampleForm.setValue("serviceType", value)}>
+                        <Select value={sampleForm.watch("serviceType") ?? ""} onValueChange={(value) => sampleForm.setValue("serviceType", value)}>
                           <SelectTrigger id="sample-service">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
                           <SelectContent>
-                            {serviceTypes.map((service) => (
+                            {SERVICE_TYPES.map((service) => (
                               <SelectItem key={service} value={service}>
                                 {service}
                               </SelectItem>
@@ -501,7 +463,7 @@ export function ContactInquiry() {
                 </Tabs>
               </CardContent>
             </Card>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

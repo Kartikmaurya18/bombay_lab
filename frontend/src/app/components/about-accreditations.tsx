@@ -1,40 +1,26 @@
 import { Shield, Award, Users, Clock, Target, TrendingUp } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 
 export function AboutAccreditations() {
   const stats = [
     { icon: Users, value: "2000+", label: "Active Clients" },
-    { icon: Target, value: "99.8%", label: "Accuracy Rate" },
+    { icon: Target, value: "20+", label: "Years Experience" },
     { icon: Clock, value: "24-48h", label: "Avg. TAT" },
     { icon: TrendingUp, value: "15K+", label: "Tests/Month" },
   ];
 
   const accreditations = [
     {
-      name: "ISO 9001:2015",
-      description: "Testing & Calibration Laboratories",
-      logo: "/assets/hero/acc1.jpg"},
-    {
+      icon: Shield,
       name: "NABL Accreditation",
-      description: "National Accreditation Board",
- logo: "/assets/hero/acc2.jpg"    },
+      description: "National Accreditation Board for Testing & Calibration Laboratories",
+    },
     {
-      name: "UKAS Certified",
-      description: "United Kingdom Accreditation",
- logo: "/assets/hero/acc3.jpg"    },
-    {
-      name: "FSSAI Approved",
-      description: "Food Safety Standards Authority",
- logo: "/assets/hero/acc4.jpg"    },
-    {
-      name: "CDSCO Licensed",
-      description: "Pharmaceutical Testing",
- logo: "/assets/hero/acc5.jpg"    },
-    {
-      name: "EPA Recognized",
-      description: "Environmental Testing",
- logo: "/assets/hero/acc6.jpg"    }
+      icon: Award,
+      name: "ISO 9001:2015",
+      description: "Certified Quality Management System",
+    },
   ];
 
   const whyChooseUs = [
@@ -46,7 +32,7 @@ export function AboutAccreditations() {
     {
       icon: Award,
       title: "Expert Team",
-      description: "PhDs and experienced analysts with 15+ years average experience in their respective domains."
+      description: "Experienced analysts and chemists with deep domain expertise."
     },
     {
       icon: Clock,
@@ -56,7 +42,7 @@ export function AboutAccreditations() {
     {
       icon: Target,
       title: "Client-Focused",
-      description: "Dedicated project managers, transparent communication, and customized reporting formats."
+      description: "Clear communication, quick quotes, and reports in the format you need."
     }
   ];
 
@@ -67,7 +53,7 @@ export function AboutAccreditations() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -99,7 +85,7 @@ export function AboutAccreditations() {
                 {stats.map((stat, index) => {
                   const Icon = stat.icon;
                   return (
-                    <motion.div
+                    <m.div
                       key={index}
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -110,14 +96,14 @@ export function AboutAccreditations() {
                       <Icon className="h-6 w-6 text-[var(--lab-teal)] mb-2" />
                       <div className="text-2xl sm:text-3xl font-bold text-[var(--lab-blue-dark)]">{stat.value}</div>
                       <div className="text-sm text-[var(--lab-gray-600)]">{stat.label}</div>
-                    </motion.div>
+                    </m.div>
                   );
                 })}
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Right Content - Image */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -132,12 +118,12 @@ export function AboutAccreditations() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--lab-blue-dark)]/30 to-transparent"></div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Why Choose Us */}
           <div className="mt-16 sm:mt-20">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -150,13 +136,13 @@ export function AboutAccreditations() {
               <p className="text-lg text-[var(--lab-gray-600)] max-w-2xl mx-auto">
                 Industry-leading expertise, technology, and commitment to client success
               </p>
-            </motion.div>
+            </m.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {whyChooseUs.map((item, index) => {
                 const Icon = item.icon;
                 return (
-                  <motion.div
+                  <m.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -172,7 +158,7 @@ export function AboutAccreditations() {
                         <p className="text-sm text-[var(--lab-gray-600)]">{item.description}</p>
                       </CardContent>
                     </Card>
-                  </motion.div>
+                  </m.div>
                 );
               })}
             </div>
@@ -183,7 +169,7 @@ export function AboutAccreditations() {
       {/* Accreditations Section */}
       <section id="accreditations" className="py-16 sm:py-20 lg:py-24 bg-[var(--lab-gray-50)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -199,36 +185,27 @@ export function AboutAccreditations() {
             <p className="text-lg text-[var(--lab-gray-600)] max-w-3xl mx-auto">
               Our accreditations demonstrate our commitment to international quality standards and regulatory compliance
             </p>
-          </motion.div>
+          </m.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-            {accreditations.map((accreditation, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-              >
-                <Card className="h-full hover:shadow-lg transition-shadow border-[var(--lab-gray-200)] group cursor-pointer">
-                  <CardContent className="p-4 text-center">
-                    <div className="aspect-video mb-3 rounded-lg overflow-hidden bg-[var(--lab-gray-100)] flex items-center justify-center">
-                      <img
-                        src={accreditation.logo}
-                        alt={accreditation.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                      />
-                    </div>
-                    <h4 className="font-semibold text-sm text-[var(--lab-blue-dark)] mb-1">{accreditation.name}</h4>
-                    <p className="text-xs text-[var(--lab-gray-600)]">{accreditation.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+          <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+            {accreditations.map(({ icon: Icon, name, description }) => (
+              <Card key={name} className="h-full border-[var(--lab-gray-200)]">
+                <CardContent className="flex items-start gap-4 p-6">
+                  <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--lab-blue-light)]">
+                    <Icon className="h-6 w-6 text-[var(--lab-blue-primary)]" />
+                  </span>
+                  <div>
+                    <h4 className="mb-1 font-semibold text-[var(--lab-blue-dark)]">{name}</h4>
+                    <p className="text-sm text-[var(--lab-gray-600)]">{description}</p>
+                    <p className="mt-2 text-xs text-[var(--lab-gray-600)]">Certificate available on request</p>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
 
           {/* Compliance Statement */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -246,7 +223,7 @@ export function AboutAccreditations() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </>

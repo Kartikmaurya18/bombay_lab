@@ -1,6 +1,6 @@
 import { MessageSquare, FileCheck, FlaskConical, FileText, CheckCircle, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { useNavigate } from "react-router-dom";
 
 export function ProcessFlow() {
@@ -47,7 +47,7 @@ export function ProcessFlow() {
     <section className="py-16 sm:py-20 lg:py-24 bg-white border-t border-[var(--lab-gray-200)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -63,7 +63,7 @@ export function ProcessFlow() {
           <p className="text-lg text-[var(--lab-gray-600)] max-w-3xl mx-auto">
             From inquiry to report delivery, we've streamlined every step for your convenience
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Desktop: Horizontal Flow */}
         <div className="hidden lg:block">
@@ -75,7 +75,7 @@ export function ProcessFlow() {
               {steps.map((step, index) => {
                 const Icon = step.icon;
                 return (
-                  <motion.div
+                  <m.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export function ProcessFlow() {
                         </div>
                       </div>
                     )}
-                  </motion.div>
+                  </m.div>
                 );
               })}
             </div>
@@ -114,7 +114,7 @@ export function ProcessFlow() {
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <motion.div
+              <m.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -145,13 +145,13 @@ export function ProcessFlow() {
                     <div className="h-8 w-0.5 bg-gradient-to-b from-[var(--lab-blue-primary)] to-[var(--lab-teal)] opacity-30"></div>
                   </div>
                 )}
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
 
         {/* CTA */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -168,7 +168,7 @@ export function ProcessFlow() {
             Start Your Testing Project
             <ArrowRight className="h-5 w-5" />
           </button>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

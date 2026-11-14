@@ -1,7 +1,10 @@
 import { lazy, Suspense } from "react";
+import { LazyMotion } from "motion/react";
 import { Toaster } from "@/app/components/ui/sonner";
 import { Navbar } from "@/app/components/navbar";
 import { Footer } from "@/app/components/footer";
+import { FloatingWhatsApp } from "@/app/components/floating-whatsapp";
+import { ScrollManager } from "@/app/components/scroll-manager";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./pages/Home";
@@ -21,7 +24,9 @@ function PageLoader() {
 
 export default function App() {
   return (
+    <LazyMotion features={() => import("./motion-features").then((mod) => mod.default)}>
     <BrowserRouter>
+      <ScrollManager />
       <div className="min-h-screen bg-white">
         <Navbar />
         <main>
@@ -36,8 +41,10 @@ export default function App() {
           </Suspense>
         </main>
         <Footer />
+        <FloatingWhatsApp />
         <Toaster position="top-right" />
       </div>
     </BrowserRouter>
+    </LazyMotion>
   );
 }
