@@ -16,7 +16,7 @@ A comprehensive, enterprise-grade website designed for professional testing labo
 ### **Key Highlights**
 
 - ✅ **Mobile-First Design** - Optimized for smartphones, tablets, and desktops
-- ✅ **10+ Testing Domains** - Materials, Construction, Chemical, Environmental, Food, Pharma, Microbiology, Electrical, Calibration, Textiles
+- ✅ **10+ Testing Domains** - Metals, Minerals, Plastics, Rubber, Textiles, Paper, Adhesives, Paints, Chemicals, Soil & Fertilizer
 - ✅ **Dual Form System** - General inquiry + Sample booking forms
 - ✅ **Trust-Focused UX** - Accreditation badges, statistics, professional imagery
 - ✅ **Accessibility Compliant** - WCAG 2.1 AA standards
@@ -97,16 +97,18 @@ npm run build
 
 ### **Testing Domains Covered**
 
-1. Materials & Metallurgy
-2. Construction & Civil Testing
-3. Chemical Analysis
-4. Environmental Testing (Water, Air, Soil, Noise)
-5. Food & Beverage Testing
-6. Pharmaceutical & Cosmetic
-7. Microbiology
-8. Electrical & Electronics
-9. Calibration Services
-10. Textiles, Polymers, Petroleum & Lubricants
+1. Metals & Alloys
+2. Minerals & Ores
+3. Plastics & Polymers
+4. Rubber & Rubber Products
+5. Textile Products
+6. Paper & Packaging
+7. Adhesives & Resins
+8. Paints & Coatings
+9. Acids, Solvents & Chemicals
+10. Soil & Fertilizer
+
+Defined in `src/app/data/services.ts`.
 
 ---
 
@@ -269,9 +271,8 @@ vercel
 ### **Primary Users**
 
 - Manufacturing & QA Teams
-- Construction & Infrastructure Companies
-- Food, Pharmaceutical & Cosmetic Companies
-- Environmental Consultants
+- Metal, Plastics, Rubber & Textile Manufacturers
+- Chemical, Paint & Fertilizer Companies
 - Government Bodies & Regulatory Agencies
 - SMEs requiring certified test reports
 
@@ -292,9 +293,6 @@ vercel
 - ISO/IEC 17025:2017 (Testing & Calibration)
 - NABL (National Accreditation Board)
 - UKAS (UK Accreditation Service)
-- FSSAI (Food Safety Standards)
-- CDSCO (Pharmaceutical Testing)
-- EPA (Environmental Testing)
 
 ### **Web Standards**
 

@@ -13,7 +13,7 @@ const quickLinks = [
 
 // Most-requested categories; the full list lives on /services.
 const featuredServices = ALL_SERVICES.filter((s) =>
-  ["metals-alloys", "materials-metallurgy", "minerals-ores", "solid-fuels", "chemicals", "water-effluents"].includes(s.slug),
+  ["metals-alloys", "minerals-ores", "chemicals", "soil-fertilizer"].includes(s.slug),
 );
 
 export function Footer() {

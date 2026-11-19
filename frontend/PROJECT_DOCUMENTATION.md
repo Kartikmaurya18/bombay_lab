@@ -195,16 +195,16 @@ Minimal state management with React hooks:
 
 The website comprehensively covers 10+ testing domains:
 
-1. **Materials & Metallurgy** - Tensile, hardness, metallography, corrosion
-2. **Construction & Civil** - Concrete, soil, aggregate, structural analysis
-3. **Chemical Analysis** - GC-MS, HPLC, ICP-OES, FTIR, wet chemistry
-4. **Environmental Testing** - Water, air, soil, noise, effluent analysis
-5. **Food & Beverage** - Nutritional analysis, contaminants, microbiology
-6. **Pharmaceutical & Cosmetic** - Stability, dissolution, quality control
-7. **Microbiology** - Bacterial, fungal, viral analysis, sterility testing
-8. **Electrical & Electronics** - Safety, EMC, performance, reliability
-9. **Calibration Services** - Dimensional, electrical, thermal, pressure, mass
-10. **Textiles & Polymers** - Physical testing, petroleum, lubricant analysis
+1. **Metals & Alloys** - XRF elemental analysis, grade identification, PMI
+2. **Minerals & Ores** - Chemical assay, particle size, mineralogical study
+3. **Plastics & Polymers** - Melt flow index, tensile strength, thermal analysis
+4. **Rubber & Rubber Products** - Tensile, hardness (Shore), abrasion, ageing
+5. **Textile Products** - Tensile strength, colour fastness, GSM, shrinkage
+6. **Paper & Packaging** - GSM, bursting strength, compression, sealing strength
+7. **Adhesives & Resins** - Bond strength, viscosity, curing time, solid content
+8. **Paints & Coatings** - Viscosity, adhesion, drying time, gloss, weathering
+9. **Acids, Solvents & Chemicals** - Purity analysis, GC-MS, HPLC, titrimetric analysis
+10. **Soil & Fertilizer** - NPK analysis, soil pH & EC, micronutrients, organic matter
 
 ---
 
@@ -212,9 +212,8 @@ The website comprehensively covers 10+ testing domains:
 
 ### **Primary Users**
 - Manufacturing & QA Teams
-- Construction & Infrastructure Companies
-- Food, Pharmaceutical & Cosmetic Companies
-- Environmental Consultants
+- Metal, Plastics, Rubber & Textile Manufacturers
+- Chemical, Paint & Fertilizer Companies
 - Government Bodies & Regulatory Agencies
 - SMEs requiring certified test reports
 
@@ -267,8 +266,6 @@ The website comprehensively covers 10+ testing domains:
 - ISO/IEC 17025:2017 (Testing Laboratory Competence)
 - NABL (National Accreditation Board for Testing)
 - UKAS (United Kingdom Accreditation Service)
-- FSSAI (Food Safety Standards Authority of India)
-- EPA (Environmental Protection Agency)
 
 ### **Web Standards**
 - WCAG 2.1 Level AA Accessibility

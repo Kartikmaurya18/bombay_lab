@@ -135,16 +135,16 @@ Desktop:   3 columns
 ```
 
 **All 10 Services**:
-1. Materials & Metallurgy
-2. Construction & Civil
-3. Chemical Analysis
-4. Environmental Testing
-5. Food & Beverage
-6. Pharmaceutical & Cosmetic
-7. Microbiology
-8. Electrical & Electronics
-9. Calibration Services
-10. Textiles & Polymers
+1. Metals & Alloys
+2. Minerals & Ores
+3. Plastics & Polymers
+4. Rubber & Rubber Products
+5. Textile Products
+6. Paper & Packaging
+7. Adhesives & Resins
+8. Paints & Coatings
+9. Acids, Solvents & Chemicals
+10. Soil & Fertilizer
 
 **Dependencies**:
 - Card components
